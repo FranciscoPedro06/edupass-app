@@ -3,17 +3,22 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Feather } from '@expo/vector-icons';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
-import { router, useRouter } from 'expo-router';
+import { RgCpf } from '../components/ComponentsCadastro/rg-cpf';
+import { Vacina } from '../components/ComponentsCadastro/vacina';
+import { Button } from '../components/Button';
+import { Foto3x4 } from '../components/ComponentsCadastro/foto3x4';
+import { Matricula } from '../components/ComponentsCadastro/matricula';
+import { Titulo } from '../components/ComponentsCadastro/titulo';
+import { Residencia } from '../components/ComponentsCadastro/residencia';
+import { RgCpfEstu } from '../components/ComponentsCadastro/rg-cpf-estudante';
+import { Header } from '../components/ComponentsCadastro/header';
 
 
 
@@ -28,20 +33,20 @@ export default function CadastroScreen() {
 
 
   const [formData, setFormData] = useState<{
-  rgCpfEstudante: string;
+  rgCpfEstudante: FileAsset | null;
   comprovanteResidencia: FileAsset | null;
   tituloEleitor: FileAsset | null;
   comprovanteMatricula: FileAsset | null;
   foto3x4: FileAsset | null;
-  rgCpfResponsavel: string;
+  rgCpfResponsavel: FileAsset | null;
   cartaoVacina: FileAsset | null;
 }>({
-  rgCpfEstudante: '',
+  rgCpfEstudante: null,
   comprovanteResidencia: null,
   tituloEleitor: null,
   comprovanteMatricula: null,
   foto3x4: null,
-  rgCpfResponsavel: '',
+  rgCpfResponsavel: null,
   cartaoVacina: null,
 });
 
@@ -51,7 +56,7 @@ export default function CadastroScreen() {
   const pickDocument = async (field: string) => {
     try {
       const result = await DocumentPicker.getDocumentAsync({
-        type: ['image/*', 'application/pdf'],
+        type: ['application/pdf'],
         copyToCacheDirectory: true,
       });
 
@@ -112,16 +117,7 @@ export default function CadastroScreen() {
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Feather name="arrow-left" size={28} color="#0000FF" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Cadastro</Text>
-        <View style={styles.placeholder} />
-      </View>
+      <Header/>
 
       {/* Main Content */}
       <View style={styles.mainContent}>
@@ -133,96 +129,28 @@ export default function CadastroScreen() {
             <Text style={styles.cardTitle}>Estudante</Text>
 
             {/* RG / CPF DO ESTUDANTE */}
-            <TextInput
-              style={styles.textInput}
-              placeholder="RG / CPF DO ESTUDANTE"
-              placeholderTextColor="#999"
-              value={formData.rgCpfEstudante}
-              onChangeText={(text) =>
-                setFormData(prev => ({ ...prev, rgCpfEstudante: text }))
-              }
-              keyboardType="numeric"
-            />
+            <RgCpfEstu pickDocument={pickDocument} FormData={formData} />
 
             {/* COMPROVANTE DE RESIDÊNCIA */}
-            <TouchableOpacity
-              style={styles.fileInput}
-              onPress={() => pickDocument('comprovanteResidencia')}
-            >
-              <Text style={styles.fileInputText}>
-                {formData.comprovanteResidencia?.name || 'COMPROVANTE DE RESIDÊNCIA'}
-              </Text>
-            </TouchableOpacity>
+            <Residencia pickDocument={pickDocument} FormData={formData} />
 
             {/* TÍTULO DE ELEITOR */}
-            <TouchableOpacity
-              style={styles.fileInput}
-              onPress={() => pickDocument('tituloEleitor')}
-            >
-              <Text style={styles.fileInputText}>
-                {formData.tituloEleitor?.name || 'TÍTULO DE ELEITOR'}
-              </Text>
-            </TouchableOpacity>
+            <Titulo pickDocument={pickDocument} FormData={formData} />
 
             {/* COMPROVANTE DE MATRÍCULA */}
-            <TouchableOpacity
-              style={styles.fileInput}
-              onPress={() => pickDocument('comprovanteMatricula')}
-            >
-              <Text style={styles.fileInputText}>
-                {formData.comprovanteMatricula?.name || 'COMPROVANTE DE MATRÍCULA'}
-              </Text>
-            </TouchableOpacity>
+           <Matricula pickDocument={pickDocument} FormData={formData} />
 
             {/* FOTO 3X4 */}
-            <TouchableOpacity
-              style={styles.fileInput}
-              onPress={() => {
-                Alert.alert(
-                  'Foto 3x4',
-                  'Escolha uma opção',
-                  [
-                    { text: 'Tirar Foto', onPress: takePhoto },
-                    { text: 'Escolher da Galeria', onPress: () => pickImage('foto3x4') },
-                    { text: 'Cancelar', style: 'cancel' },
-                  ]
-                );
-              }}
-            >
-              <Text style={styles.fileInputText}>
-                {formData.foto3x4?.uri ? 'Foto selecionada' : 'FOTO 3X4'}
-              </Text>
-            </TouchableOpacity>
+            <Foto3x4 FormData={formData} takePhoto={takePhoto} pickImage={pickImage} />
 
             {/* RG / CPF DO RESPONSÁVEL */}
-            <TextInput
-              style={styles.textInput}
-              placeholder="RG / CPF DO RESPONSÁVEL"
-              placeholderTextColor="#999"
-              value={formData.rgCpfResponsavel}
-              onChangeText={(text) =>
-                setFormData(prev => ({ ...prev, rgCpfResponsavel: text }))
-              }
-              keyboardType="numeric"
-            />
+            <RgCpf pickDocument={pickDocument} FormData={formData} />
 
             {/* CARTÃO DE VACINA */}
-            <TouchableOpacity
-              style={styles.fileInput}
-              onPress={() => pickDocument('cartaoVacina')}
-            >
-              <Text style={styles.fileInputText}>
-                {formData.cartaoVacina?.name || 'CARTÃO DE VACINA'}
-              </Text>
-            </TouchableOpacity>
+            <Vacina FormData={formData} setFormData={setFormData} pickDocument={pickDocument} />
 
             {/* Submit */}
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}
-            >
-              <Text style={styles.submitButtonText}>Concluído</Text>
-            </TouchableOpacity>
+            <Button title="Finalizar Cadastro" onPress={handleSubmit} />
           </View>
         </ScrollView>
       </View>
@@ -232,27 +160,7 @@ export default function CadastroScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFFFF' },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  backButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    borderWidth: 2,
-    borderColor: '#0000FF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#0000FF' },
-  placeholder: { width: 56 },
+
   mainContent: { flex: 1, backgroundColor: '#0000FF' },
   scrollContent: { padding: 20, paddingTop: 40, paddingBottom: 40 },
   card: {
@@ -272,46 +180,5 @@ const styles = StyleSheet.create({
     color: '#1A1A1A',
     marginBottom: 24,
   },
-  textInput: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#0000FF',
-    borderRadius: 25,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#333',
-    marginBottom: 16,
-  },
-  fileInput: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#0000FF',
-    borderRadius: 25,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    marginBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fileInputText: {
-    fontSize: 14,
-    color: '#999',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-  },
-  submitButton: {
-    backgroundColor: '#0000FF',
-    borderRadius: 25,
-    paddingVertical: 18,
-    marginTop: 24,
-    alignItems: 'center',
-    shadowColor: '#0000FF',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
-  },
-  submitButtonText: { color: '#FFFFFF', fontSize: 18, fontWeight: 'bold' },
+  
 });
