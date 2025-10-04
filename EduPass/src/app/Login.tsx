@@ -22,8 +22,8 @@ export default function LoginScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Bem-Vindo ao,</Text>
-          <Text style={styles.title}>EduPass!</Text>
+          <Text style={styles.title}>EduPass</Text>
+          <Text style={styles.subTitle}>Seja Bem Vindo!</Text>
         </View>
 
         {/* Card */}
@@ -38,10 +38,10 @@ export default function LoginScreen() {
           <Remember rememberMe={rememberMe} setRememberMe={setRememberMe} onPress1={() => alert("Recuperar senha!")} onPress2={()=> setShowPassword(!showPassword)} />
 
           {/* Login Button */}
-          <Button title="Entrar" onPress={() => alert("Login efetuado!") } />
+          <Button title="Entrar" onPress={() => router.push('/TermoCompromisso/termo') } />
 
           {/* Sign Up Link */}
-          <Signup onPress={() => router.push('/CadastroEstudante')} />
+          <Signup onPress={() => router.push('/Aluno/CadastroEstudante')} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -69,6 +69,13 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  subTitle: {
+    fontSize: 38,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'center'
   },
   card: {
     backgroundColor: '#F5F5F5',

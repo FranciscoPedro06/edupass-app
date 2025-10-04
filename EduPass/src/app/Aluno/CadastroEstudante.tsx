@@ -10,15 +10,15 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
-import { RgCpf } from '../components/ComponentsCadastro/rg-cpf';
-import { Vacina } from '../components/ComponentsCadastro/vacina';
-import { Button } from '../components/Button';
-import { Foto3x4 } from '../components/ComponentsCadastro/foto3x4';
-import { Matricula } from '../components/ComponentsCadastro/matricula';
-import { Titulo } from '../components/ComponentsCadastro/titulo';
-import { Residencia } from '../components/ComponentsCadastro/residencia';
-import { RgCpfEstu } from '../components/ComponentsCadastro/rg-cpf-estudante';
-import { Header } from '../components/ComponentsCadastro/header';
+import { RgCpf } from '../../components/Cadastro/rg-cpf';
+import { Vacina } from '../../components/Cadastro/vacina';
+import { Button } from '../../components/Button';
+import { Foto3x4 } from '../../components/Cadastro/foto3x4';
+import { Matricula } from '../../components/Cadastro/matricula';
+import { Titulo } from '../../components/Cadastro/titulo';
+import { Residencia } from '../../components/Cadastro/residencia';
+import { RgCpfEstu } from '../../components/Cadastro/rg-cpf-estudante';
+import { Header } from '../../components/Cadastro/header';
 
 
 
