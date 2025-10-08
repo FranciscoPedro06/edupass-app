@@ -1,0 +1,80 @@
+ 
+ import { StyleSheet } from 'react-native';
+ 
+ export const styles = StyleSheet.create({
+    header: {
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+    headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#0000FF' },
+    placeholder: { width: 56 },
+  
+    backButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    borderWidth: 4,
+    borderColor: '#0000FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+    scrollView: { flex: 1 },
+    scrollContent: { paddingHorizontal: 32, paddingVertical: 40 },
+    textContent: { gap: 24 },
+    mainTitle: { fontSize: 20, fontWeight: 'bold', color: '#111827', marginBottom: 8 },
+    paragraph: { fontSize: 16, lineHeight: 24, color: '#111827' },
+    paragraphBold: { fontSize: 16, lineHeight: 24, color: '#111827', fontWeight: '600' },
+    section: { marginTop: 16, gap: 16 },
+    sectionTitle: { fontSize: 16, fontWeight: 'bold', color: '#111827' },
+    finalParagraph: { marginTop: 16 },
+
+    bottomSection: {
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    paddingHorizontal: 32,
+    paddingVertical: 24,
+    backgroundColor: '#FFFFFF',
+    gap: 24,
+  },
+
+    checkboxContainer: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
+    checkbox: {
+    width: 24,
+    height: 24,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: '#9CA3AF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 2,
+  },
+
+    checkboxChecked: { backgroundColor: '#0000FF', borderColor: '#0000FF' },
+    checkboxInner: { width: 12, height: 12, backgroundColor: '#FFFFFF', borderRadius: 2 },
+    checkboxLabel: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#111827',
+    lineHeight: 22,
+  },
+    acceptButton: {
+    backgroundColor: '#006400',
+    paddingVertical: 20,
+    borderRadius: 28,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+    acceptButtonDisabled: { backgroundColor: '#D1D5DB' },
+    acceptButtonText: { color: '#FFFFFF', fontSize: 18, fontWeight: 'bold' },
+ });

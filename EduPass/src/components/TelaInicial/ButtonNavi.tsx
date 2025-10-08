@@ -20,7 +20,7 @@ interface ButtonNaviProps {
   }>;
 }
 
-export const ButtonNavi: React.FC<ButtonNaviProps> = ({
+export const Button: React.FC<ButtonNaviProps> = ({
   bottomNavItems,
   handleMenuPress,
   IconComponent,
